@@ -1,2 +1,3 @@
-# tools
-tools
+# 
+
+go build -ldflags="-H windowsgui"

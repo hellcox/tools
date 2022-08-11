@@ -1,0 +1,5 @@
+[Details]
+  Icon = "./assets/icon1.png"
+  Name = "Fyne Demo"
+  ID = "io.fyne.demo"
+  Build = 6
