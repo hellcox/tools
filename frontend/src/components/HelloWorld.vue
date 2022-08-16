@@ -2,6 +2,7 @@
   <div class="container">
     <h1>{{message}}</h1>
     <a @click="getMessage">Press Me!</a>
+    <el-input v-model="input" placeholder="请输入内容"></el-input>
   </div>
 </template>
 
@@ -9,7 +10,8 @@
 export default {
   data() {
     return {
-      message: " "
+      message: " ",
+      input: " "
     };
   },
   methods: {
