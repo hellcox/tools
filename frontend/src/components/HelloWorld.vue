@@ -1,3 +1,13 @@
+<template>
+  <main>
+    <div id="result" class="result">{{ data.resultText }}</div>
+    <div id="input" class="input-box">
+      <input id="name" v-model="data.name" autocomplete="off" class="input" type="text"/>
+      <button class="btn" @click="greet">Greet</button>
+    </div>
+  </main>
+</template>
+
 <script setup>
 import {reactive} from 'vue'
 import {Greet} from '../../wailsjs/go/main/App'
@@ -14,16 +24,6 @@ function greet() {
 }
 
 </script>
-
-<template>
-  <main>
-    <div id="result" class="result">{{ data.resultText }}</div>
-    <div id="input" class="input-box">
-      <input id="name" v-model="data.name" autocomplete="off" class="input" type="text"/>
-      <button class="btn" @click="greet">Greet</button>
-    </div>
-  </main>
-</template>
 
 <style scoped>
 .result {
