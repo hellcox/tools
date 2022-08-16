@@ -1,71 +1,55 @@
 <template>
-  <main>
-    <div id="result" class="result">{{ data.resultText }}</div>
-    <div id="input" class="input-box">
-      <input id="name" v-model="data.name" autocomplete="off" class="input" type="text"/>
-      <button class="btn" @click="greet">Greet</button>
-    </div>
-  </main>
+  <div class="container">
+    <h1>{{message}}</h1>
+    <a @click="getMessage">Press Me!</a>
+  </div>
 </template>
 
-<script setup>
-import {reactive} from 'vue'
-import {Greet} from '../../wailsjs/go/main/App'
-
-const data = reactive({
-  name: "",
-  resultText: "Please enter your name below 👇",
-})
-
-function greet() {
-  Greet(data.name).then(result => {
-    data.resultText = result
-  })
-}
-
+<script>
+export default {
+  data() {
+    return {
+      message: " "
+    };
+  },
+  methods: {
+    getMessage: function() {
+      var self = this;
+      window.backend.basic().then(result => {
+        self.message = result;
+      });
+    }
+  }
+};
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.result {
-  height: 20px;
-  line-height: 20px;
-  margin: 1.5rem auto;
+h1 {
+  margin-top: 2em;
+  position: relative;
+  min-height: 5rem;
+  width: 100%;
 }
-
-.input-box .btn {
-  width: 60px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 3px;
-  border: none;
-  margin: 0 0 0 20px;
-  padding: 0 8px;
+a:hover {
+  font-size: 1.7em;
+  border-color: blue;
+  background-color: blue;
+  color: white;
+  border: 3px solid white;
+  border-radius: 10px;
+  padding: 9px;
   cursor: pointer;
+  transition: 500ms;
 }
-
-.input-box .btn:hover {
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-  color: #333333;
-}
-
-.input-box .input {
-  border: none;
-  border-radius: 3px;
-  outline: none;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  background-color: rgba(240, 240, 240, 1);
-  -webkit-font-smoothing: antialiased;
-}
-
-.input-box .input:hover {
-  border: none;
-  background-color: rgba(255, 255, 255, 1);
-}
-
-.input-box .input:focus {
-  border: none;
-  background-color: rgba(255, 255, 255, 1);
+a {
+  font-size: 1.7em;
+  border-color: white;
+  background-color: #121212;
+  color: white;
+  border: 3px solid white;
+  border-radius: 10px;
+  padding: 9px;
+  cursor: pointer;
 }
 </style>

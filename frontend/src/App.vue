@@ -1,23 +1,18 @@
 <template>
-<!--  <img id="logo" alt="Wails logo" src="./assets/images/logo-universal.png"/>-->
-<!--  <HelloWorld/>-->
-  <router-view></router-view>
+  <div id="app">
+    <img alt="Wails logo" src="./assets/images/logo.png" class="logo zoomIn">
+    <HelloWorld/>
+  </div>
 </template>
 
-<script setup>
-// import HelloWorld from './components/HelloWorld.vue'
-</script>
+<script>
+import HelloWorld from "./components/HelloWorld.vue";
+import "./assets/css/main.css";
 
-<style>
-#logo {
-  display: block;
-  width: 50%;
-  height: 50%;
-  margin: auto;
-  padding: 10% 0 0;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-origin: content-box;
-}
-</style>
+export default {
+  name: "app",
+  components: {
+    HelloWorld
+  }
+};
+</script>

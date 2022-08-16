@@ -1,14 +1,15 @@
-import {createApp} from 'vue'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import App from './App.vue'
-import router from './router/routes'
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import Vue from 'vue';
+import App from './App.vue';
 
-const app = createApp(App)
+Vue.config.productionTip = false;
+Vue.config.devtools = true;
 
-app.use(ElementPlus, {
-    locale: zhCn,
-})
-app.use(router)
-app.mount('#app')
+import * as Wails from '@wailsapp/runtime';
+
+Wails.Init(() => {
+	new Vue({
+		render: h => h(App)
+	}).$mount('#app');
+});
