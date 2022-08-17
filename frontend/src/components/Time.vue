@@ -1,26 +1,38 @@
 <template>
-  <div style="height: 100%;position: fixed;width: 100%;padding: 0;margin: 0;background: #ccc;float: right">
+  <div style="height: 100%;position: fixed;width: 100%;padding: 0;margin: 0;">
 
-    <el-container style="height: 100%;padding: 0;margin: 0;position: absolute;width: 100%">
-      <el-aside style="height:20%;width: 50%;padding: 0;margin: 0;position: fixed;left: 0">Aside</el-aside>
-      <el-main style="height:20%;width: 50%;padding: 0;margin: 0;position: fixed;right: 0">
-        Main
-        <p class="p">1asdfasdjflka;jfdkljaslkjfalkjfl;kjaklsjdflkajl;kfjkljf;lk111</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>2</p>
-        <p>2</p>
-        <p>2</p>
-        <p>2</p>
-        <p>2</p>
-        <p>3</p>
+    <el-container style="height: 100%;padding: 0;margin: 0;min-width: 200px;">
+      <el-aside style="height:100%;width: 50%;padding: 10px">
+
+
+        <el-row class="elrow">
+          <el-col :span="9">
+            <el-input v-model="input" placeholder="" style="width: 96%;float: left"></el-input>
+          </el-col>
+          <el-col :span="6" style="text-align: center">
+            <el-button type="primary" style="width: 100%" @click="getMessage">TO 时间</el-button>
+          </el-col>
+          <el-col :span="9">
+            <el-input v-model="input" placeholder="" style="width: 96%;float: right"></el-input>
+          </el-col>
+        </el-row>
+
+        <el-row class="elrow">
+          <el-col :span="9">
+            <el-input v-model="input" placeholder="" style="width: 96%;float: left"></el-input>
+          </el-col>
+          <el-col :span="6" style="text-align: center">
+            <el-button type="primary" style="width: 100%" @click="getMessage">TO 时间戳</el-button>
+          </el-col>
+          <el-col :span="9">
+            <el-input v-model="input" placeholder="" style="width: 96%;float: right"></el-input>
+          </el-col>
+        </el-row>
+
+
+
+      </el-aside>
+      <el-main style="height:100%;width: 50%;">
       </el-main>
     </el-container>
 
@@ -52,7 +64,7 @@ export default {
   methods: {
     getMessage: function() {
       var self = this;
-      window.backend.basic().then(result => {
+      window.backend.basic("xxx").then(result => {
         self.input = result;
       });
     }
@@ -77,6 +89,10 @@ export default {
   word-break: break-all;
   white-space:normal;
   word-wrap: break-word;
+}
+
+.elrow{
+  margin-bottom: 20px;
 }
 
 </style>

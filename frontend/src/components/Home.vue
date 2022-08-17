@@ -2,7 +2,7 @@
   <div class="container">
 
     <el-tabs type="border-card" tab-position="left" style="height: 100%;width:100%;position: fixed">
-      <el-tab-pane label="用户管理">    <Time/> </el-tab-pane>
+      <el-tab-pane label="时间转换"><Time/></el-tab-pane>
       <el-tab-pane label="配置管理">配置管理</el-tab-pane>
       <el-tab-pane label="角色管理">角色管理</el-tab-pane>
       <el-tab-pane label="定时任务">定时任务补偿</el-tab-pane>

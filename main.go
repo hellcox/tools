@@ -5,8 +5,8 @@ import (
 	"github.com/wailsapp/wails"
 )
 
-func basic() string {
-	return "Hello World!"
+func basic(a string) string {
+	return "Hello World!" + a
 }
 
 //go:embed frontend/dist/app.js

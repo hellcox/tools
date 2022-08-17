@@ -5,3 +5,7 @@
 /build/bin
 /frontend/package.json.md5
 /frontend/package-lock.json
+/tools.ico
+/tools.exe.manifest
+/tools.rc
+/tools-res.syso
