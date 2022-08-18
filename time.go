@@ -25,7 +25,7 @@ func getNowTimestamp() string {
 func time2Date(val string) string {
 	timestamp, err := strconv.ParseInt(val, 10, 64)
 	if err != nil {
-		return "秒级时间戳错误"
+		return "解析失败"
 	}
 	now := time.Unix(timestamp, 0)
 	res := now.Format(TimeFormatA)
