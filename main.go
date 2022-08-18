@@ -6,7 +6,7 @@ import (
 )
 
 func basic(a string) string {
-	return "Hello World!" + a
+	return "Hello: " + a
 }
 
 //go:embed frontend/dist/app.js

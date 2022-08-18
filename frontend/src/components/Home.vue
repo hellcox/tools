@@ -3,7 +3,7 @@
 
     <el-tabs type="border-card" tab-position="left" style="height: 100%;width:100%;position: fixed">
       <el-tab-pane label="时间转换"><Time/></el-tab-pane>
-      <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+      <el-tab-pane label="Json转换"><Json/></el-tab-pane>
       <el-tab-pane label="角色管理">角色管理</el-tab-pane>
       <el-tab-pane label="定时任务">定时任务补偿</el-tab-pane>
     </el-tabs>
@@ -13,9 +13,10 @@
 
 <script>
 import Time from './Time'
+import Json from './Json'
 export default {
   components: {
-    Time
+    Time,Json
   },
   data() {
     return {
@@ -41,7 +42,7 @@ export default {
   border-bottom-color: #d1dbe5 !important;
 }
 
-.container /deep/ .el-tabs--left.el-tabs--border-card .el-tabs__item.is-left{
+/deep/ .el-tabs--left.el-tabs--border-card .el-tabs__item.is-left{
   border-right-color: #DCDFE6 !important;
 }
 
@@ -52,5 +53,8 @@ export default {
 .container /deep/ .el-tabs--border-card>.el-tabs__content {
   margin: 0;
   padding: 0;
+  height: 100%;
+  /*display: block;*/
+  /*position: relative;*/
 }
 </style>
