@@ -3,9 +3,10 @@
 
     <el-tabs type="border-card" tab-position="left" style="height: 100%;width:100%;position: fixed">
       <el-tab-pane label="时间转换"><Time/></el-tab-pane>
-      <el-tab-pane label="Json转换"><Json/></el-tab-pane>
-      <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务">定时任务补偿</el-tab-pane>
+      <el-tab-pane label="JSON转换"><Json/></el-tab-pane>
+      <el-tab-pane label="MD5">角色管理</el-tab-pane>
+      <el-tab-pane label="BASE64">角色管理</el-tab-pane>
+      <el-tab-pane label="关于"><About/></el-tab-pane>
     </el-tabs>
 
   </div>
@@ -14,9 +15,10 @@
 <script>
 import Time from './Time'
 import Json from './Json'
+import About from './About'
 export default {
   components: {
-    Time,Json
+    Time,Json,About
   },
   data() {
     return {
@@ -53,8 +55,12 @@ export default {
 .container /deep/ .el-tabs--border-card>.el-tabs__content {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100vh;
   /*display: block;*/
   /*position: relative;*/
+}
+
+/deep/ .el-tab-pane{
+  height: 100vh;
 }
 </style>

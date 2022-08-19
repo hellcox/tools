@@ -18,8 +18,8 @@ var css string
 func main() {
 
 	app := wails.CreateApp(&wails.AppConfig{
-		Width:     1024,
-		Height:    600,
+		Width:     1366,
+		Height:    650,
 		Title:     "tools",
 		JS:        js,
 		CSS:       css,
@@ -30,5 +30,7 @@ func main() {
 	app.Bind(time2Date)
 	app.Bind(date2Time)
 	app.Bind(getNowTimestamp)
+	app.Bind(jsonFormat)
+	app.Bind(jsonCompress)
 	app.Run()
 }

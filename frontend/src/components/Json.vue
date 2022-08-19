@@ -1,17 +1,23 @@
 <template>
   <div class="container">
-      <el-container>
-<!--        <el-header>Header</el-header>-->
-        <el-container>
-          <el-scrollbar style="height: 100%;width: 50%">
-            <el-aside style="height: 100%;width: 100%">
-              <p v-for="(item ,i) in list1" v-bind:key="i">{{i}}</p>
-            </el-aside>
-          </el-scrollbar>
-          <el-main style="height: 100%;width: 50%">Main</el-main>
-        </el-container>
-      </el-container>
 
+    <el-row style="margin-bottom: 10px">
+      <el-button-group>
+        <el-button type="primary" size="medium">历史记录</el-button>
+        <el-button type="primary" size="medium">去除转义</el-button>
+        <el-button type="primary" size="medium" @click="compress">压缩</el-button>
+        <el-button type="primary" size="medium" @click="format">解析</el-button>
+      </el-button-group>
+    </el-row>
+
+    <el-row :gutter="24">
+      <el-col :span="12">
+        <el-input type="textarea" style="width: 100%;height: 550px;" placeholder="请输入内容" v-model="input"></el-input>
+      </el-col>
+      <el-col :span="12">
+        <el-input type="textarea" style="width: 100%;height: 550px;" v-model="output"></el-input>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -20,16 +26,28 @@
 export default {
   data() {
     return {
-      list1:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
-      list2:[1,1,1,1,1,1,1,1,1],
-      message: "tmp",
+      input: '{"test":"hello world!"}',
+      output: "",
     };
   },
   methods: {
-    getMessage: function() {
+    getMessage: function () {
       var self = this;
       window.backend.basic(self.message).then(result => {
         self.message = result;
+      });//end method
+    },//end func
+    format: function () {
+      var self = this;
+      var data = unescape(self.input.replace(/\\u/g, '%u'))
+      window.backend.jsonFormat(data).then(result => {
+        self.output = result;
+      });//end method
+    },//end func
+    compress: function () {
+      var self = this;
+      window.backend.jsonCompress(self.input).then(result => {
+        self.output = result;
       });//end method
     },//end func
   }
@@ -40,51 +58,64 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+/deep/ .el-scrollbar__wrap {
+  overflow-x: hidden !important;
+}
 
-
-.container{
-  height: 100%;
-  width: 100%;
-  padding: 0 ;
+.container {
+  margin: 10px;
+  display: block;
   overflow: hidden;
+  /*background: rgba(250, 250, 250, 1);*/
+
+  /*宽度撑破容器使用下列样式*/
+  width: 98%; /*不支持calc()的浏览器*/
+  width: -moz-calc(100% - 20px);
+  width: -webkit-calc(100% - 20px);
+  width: calc(100% - 20px);
+  height: 90% !important; /*不支持calc()的浏览器*/
+  height: -moz-calc(100% - 20px) !important;
+  height: -webkit-calc(100% - 20px) !important;
+  height: calc(100% - 20px) !important;
+}
+
+/deep/ .el-textarea__inner {
+  height: calc(100%);
+  /*padding: 5px;*/
 }
 
 
-.el-aside{
+.el-aside {
+  padding: 0;
+  margin: 0;
   background-color: #D3DCE6;
-  overflow-y: hidden;
+  height: 100vh;
+  width: 50% !important;
+  position: relative;
 }
 
-.bg-purple {
-  background: #d3dce6;
+.el-main {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100% !important;
+  background-color: #c3DaE0;
 }
-.bg-purple-light {
-  background: #e5e9f2;
-}
-.grid-content {
+
+pre {
+  display: block;
+  background: #fff;
+  margin: 0;
+  width: calc(100% - 22px) !important;
+  height: 540px;
+  border: 1px solid #DCDFE6;
+  padding: 5px 10px;
   border-radius: 4px;
-  min-height: 36px;
-}
-.el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
+  overflow: scroll;
 }
 
-
-
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
+pre:hover {
+  border-color: rgba(192, 196, 204);
 }
 
 </style>

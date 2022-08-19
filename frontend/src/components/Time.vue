@@ -5,35 +5,19 @@
       <el-aside style="height:100%;width: 50%;padding: 10px">
 
         <el-divider content-position="left"><span class="elline">当前时间</span></el-divider>
-
         <el-row class="elrow">
           <el-col :span="9">
             <el-input v-model="timeNow.timestamp" placeholder="" style="width: 96%;float: left"></el-input>
           </el-col>
           <el-col :span="6" style="text-align: center">
-            <el-button type="primary" plain style="width: 100%" @click="NowTime">更新</el-button>
+            <el-button type="primary" plain style="width: 100%" @click="ExecTimer">启停</el-button>
           </el-col>
           <el-col :span="9">
             <el-input v-model="timeNow.date" placeholder="" style="width: 96%;float: right"></el-input>
           </el-col>
         </el-row>
 
-        <el-divider content-position="left"><span class="elline">日期 <i class="el-icon-right"></i> 时间戳</span></el-divider>
-
-        <el-row class="elrow">
-          <el-col :span="9">
-            <el-input v-model="date2Time.in" placeholder="" style="width: 96%;float: left"></el-input>
-          </el-col>
-          <el-col :span="6" style="text-align: center">
-            <el-button type="primary" plain style="width: 100%" @click="DateToTime">转换</el-button>
-          </el-col>
-          <el-col :span="9">
-            <el-input v-model="date2Time.out" placeholder="" style="width: 96%;float: right"></el-input>
-          </el-col>
-        </el-row>
-
-        <el-divider content-position="left"><span class="elline">时间戳 <i class="el-icon-right"></i> 日期</span></el-divider>
-
+        <el-divider content-position="left"><span class="elline">戳值 <i class="el-icon-right"></i> 日期</span></el-divider>
         <el-row class="elrow">
           <el-col :span="9">
             <el-input v-model="time2Date.in" placeholder="" style="width: 96%;float: left"></el-input>
@@ -43,6 +27,19 @@
           </el-col>
           <el-col :span="9">
             <el-input v-model="time2Date.out" placeholder="" style="width: 96%;float: right"></el-input>
+          </el-col>
+        </el-row>
+
+        <el-divider content-position="left"><span class="elline">日期 <i class="el-icon-right"></i> 戳值</span></el-divider>
+        <el-row class="elrow">
+          <el-col :span="9">
+            <el-input v-model="date2Time.in" placeholder="" style="width: 96%;float: left"></el-input>
+          </el-col>
+          <el-col :span="6" style="text-align: center">
+            <el-button type="primary" plain style="width: 100%" @click="DateToTime">转换</el-button>
+          </el-col>
+          <el-col :span="9">
+            <el-input v-model="date2Time.out" placeholder="" style="width: 96%;float: right"></el-input>
           </el-col>
         </el-row>
 
@@ -79,6 +76,7 @@ export default {
         timestamp: '',
         date: '',
       },
+      timer: '',
     };
   },
   methods: {
@@ -111,9 +109,22 @@ export default {
         });
       });
     },//end
+    ExecTimer: function() {
+      var self = this;
+      if (self.timer===''){
+        self.NowTime()
+        self.timer = setInterval(() => {
+          self.NowTime()
+        },1000)
+      }else{
+        clearTimeout(self.timer)
+        self.timer = ''
+      }
+    },//end
   },//end
   created() {
     this.NowTime()
+    this.ExecTimer()
   }
 };
 </script>
