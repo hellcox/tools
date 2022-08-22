@@ -3,7 +3,7 @@
 
     <el-row style="margin-bottom: 10px">
       <el-button-group>
-        <el-button type="primary" size="medium">历史记录</el-button>
+        <el-button type="primary" size="medium" @click="dialog.history=true">历史记录</el-button>
         <el-button type="primary" size="medium">去除转义</el-button>
         <el-button type="primary" size="medium" @click="compress">压缩</el-button>
         <el-button type="primary" size="medium" @click="format">解析</el-button>
@@ -18,6 +18,17 @@
         <el-input type="textarea" style="width: 100%;height: 550px;" v-model="output"></el-input>
       </el-col>
     </el-row>
+
+    <el-dialog title="历史记录" :visible.sync="dialog.history" fullscreen="true" :modal-append-to-body="false">
+      <el-table :data="history">
+        <el-table-column property="in" label="输入"></el-table-column>
+        <el-table-column property="out" label="输出"></el-table-column>
+        <el-table-column label="操作">
+          <el-button type="primary" size="mini">去除转义</el-button>
+        </el-table-column>
+      </el-table>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -28,6 +39,10 @@ export default {
     return {
       input: '{"test":"hello world!"}',
       output: "",
+      dialog: {
+        history: false,
+      },
+      history:[{in:111,out:222}],
     };
   },
   methods: {
