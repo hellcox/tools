@@ -19,12 +19,14 @@
       </el-col>
     </el-row>
 
-    <el-dialog title="历史记录" :visible.sync="dialog.history" fullscreen="true" :modal-append-to-body="false">
+    <el-dialog title="历史记录" :visible.sync="dialog.history" :fullscreen="true" :modal-append-to-body="false">
       <el-table :data="history">
         <el-table-column property="in" label="输入"></el-table-column>
         <el-table-column property="out" label="输出"></el-table-column>
-        <el-table-column label="操作">
-          <el-button type="primary" size="mini">去除转义</el-button>
+        <el-table-column label="操作" width="100px">
+          <template v-slot="scope">
+            <el-button type="primary" size="mini" @click="fillInput(scope.row)">填充显示</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </el-dialog>
@@ -42,10 +44,18 @@ export default {
       dialog: {
         history: false,
       },
-      history:[{in:111,out:222}],
+      history:[
+        // {in:111,out:32}
+      ],
     };
   },
   methods: {
+    fillInput: function (row) {
+      console.log(row)
+      this.input = row.in;
+      this.output = row.out;
+      this.dialog.history = false
+    },
     getMessage: function () {
       var self = this;
       window.backend.basic(self.message).then(result => {
@@ -57,12 +67,20 @@ export default {
       var data = unescape(self.input.replace(/\\u/g, '%u'))
       window.backend.jsonFormat(data).then(result => {
         self.output = result;
+        self.history.unshift({
+          in:self.input,
+          out:result
+        })
       });//end method
     },//end func
     compress: function () {
       var self = this;
       window.backend.jsonCompress(self.input).then(result => {
         self.output = result;
+        self.history.unshift({
+          in:self.input,
+          out:result
+        })
       });//end method
     },//end func
   }
