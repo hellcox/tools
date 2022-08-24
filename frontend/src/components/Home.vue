@@ -2,23 +2,26 @@
   <div class="container">
 
     <el-tabs type="border-card" tab-position="left" style="height: 100%;width:100%;position: fixed">
-      <el-tab-pane label="时间转换"><Time/></el-tab-pane>
-      <el-tab-pane label="JSON转换"><Json/></el-tab-pane>
-      <el-tab-pane label="MD5">角色管理</el-tab-pane>
-      <el-tab-pane label="BASE64">角色管理</el-tab-pane>
-      <el-tab-pane label="关于"><About/></el-tab-pane>
+      <el-tab-pane label="时间转换"> <Time/> </el-tab-pane>
+      <el-tab-pane label="加密解密"> <Decode/> </el-tab-pane>
+      <el-tab-pane label="格式化"> <Format/> </el-tab-pane>
+      <el-tab-pane label="编码转换"> 编码转换 </el-tab-pane>
+      <el-tab-pane label="数据计算"> 数据计算 </el-tab-pane>
+      <el-tab-pane label="我的收藏"> 我的收藏 </el-tab-pane>
+      <el-tab-pane label="关于"> <About/> </el-tab-pane>
     </el-tabs>
 
   </div>
 </template>
 
 <script>
-import Time from './Time'
-import Json from './Json'
+import Time from './tool/Time'
 import About from './About'
+import Format from './Format'
+import Decode from './Decode'
 export default {
   components: {
-    Time,Json,About
+    Time,About,Format,Decode
   },
   data() {
     return {

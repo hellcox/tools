@@ -32,5 +32,8 @@ func main() {
 	app.Bind(getNowTimestamp)
 	app.Bind(jsonFormat)
 	app.Bind(jsonCompress)
+	app.Bind(removeEscaping)
+	app.Bind(encode)
+	app.Bind(decode)
 	app.Run()
 }

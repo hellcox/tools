@@ -11,3 +11,12 @@ func GetNum(str string) string {
 	newStr := strings.Join(patten.FindAllString(str, -1), "")
 	return newStr
 }
+
+func InArrString(val string, arr []string) bool {
+	for _, item := range arr {
+		if item == val {
+			return true
+		}
+	}
+	return false
+}
