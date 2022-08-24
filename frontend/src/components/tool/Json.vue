@@ -19,7 +19,7 @@
       </el-col>
     </el-row>
 
-    <el-dialog title="历史记录" :visible.sync="dialog.history" :fullscreen="false" width="90%" :lock-scroll="true" :modal-append-to-body="false">
+    <el-dialog title="历史记录" :visible.sync="dialog.history" :fullscreen="false" width="900px" :lock-scroll="true" :modal-append-to-body="false">
       <el-table :data="history" stripe>
         <el-table-column property="action" label="动作" width="70px"></el-table-column>
         <el-table-column property="in" label="输入"></el-table-column>
@@ -111,6 +111,10 @@ export default {
 
 /deep/ .el-textarea__inner {
   height: calc(100%);
+}
+
+/deep/ .el-table {
+  width: 900px !important;
 }
 
 </style>
