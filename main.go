@@ -1,39 +1,87 @@
 package main
 
 import (
-	_ "embed"
-	"github.com/wailsapp/wails"
+	"embed"
+	"log"
+
+	"github.com/wailsapp/wails/v2"
+	"github.com/wailsapp/wails/v2/pkg/logger"
+	"github.com/wailsapp/wails/v2/pkg/options"
+	"github.com/wailsapp/wails/v2/pkg/options/mac"
+	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
-func basic(a string) string {
-	return "Hello: " + a
-}
+//go:embed frontend/dist
+var assets embed.FS
 
-//go:embed frontend/dist/app.js
-var js string
-
-//go:embed frontend/dist/app.css
-var css string
+//go:embed build/appicon.png
+var icon []byte
 
 func main() {
+	// Create an instance of the app structure
+	// 创建一个App结构体实例
+	app := NewApp()
 
-	app := wails.CreateApp(&wails.AppConfig{
-		Width:     1366,
-		Height:    650,
-		Title:     "tools",
-		JS:        js,
-		CSS:       css,
-		Colour:    "#131313",
-		Resizable: true,
+	// Create application with options
+	// 使用选项创建应用
+	err := wails.Run(&options.App{
+		Title:             "tools",
+		Width:             900,
+		Height:            600,
+		MinWidth:          900,
+		MinHeight:         600,
+		MaxWidth:          1200,
+		MaxHeight:         800,
+		DisableResize:     false,
+		Fullscreen:        false,
+		Frameless:         false,
+		StartHidden:       false,
+		HideWindowOnClose: false,
+		RGBA:              &options.RGBA{R: 255, G: 255, B: 255, A: 0},
+		Assets:            assets,
+		Menu:              nil,
+		Logger:            nil,
+		LogLevel:          logger.DEBUG,
+		OnStartup:         app.startup,
+		OnDomReady:        app.domReady,
+		OnBeforeClose:     app.beforeClose,
+		OnShutdown:        app.shutdown,
+		WindowStartState:  options.Normal,
+		Bind: []interface{}{
+			app,
+		},
+		// Windows platform specific options
+		// Windows平台特定选项
+		Windows: &windows.Options{
+			WebviewIsTransparent: true,
+			WindowIsTranslucent:  false,
+			DisableWindowIcon:    false,
+			// DisableFramelessWindowDecorations: false,
+			WebviewUserDataPath: "",
+		},
+		// Mac platform specific options
+		// Mac平台特定选项
+		Mac: &mac.Options{
+			TitleBar: &mac.TitleBar{
+				TitlebarAppearsTransparent: true,
+				HideTitle:                  true,
+				HideTitleBar:               false,
+				FullSizeContent:            true,
+				UseToolbar:                 false,
+				HideToolbarSeparator:       false,
+			},
+			Appearance:           mac.NSAppearanceNameDarkAqua,
+			WebviewIsTransparent: true,
+			WindowIsTranslucent:  true,
+			About: &mac.AboutInfo{
+				Title:   "Wails Template Vue",
+				Message: "A Wails template based on Vue and Vue-Router",
+				Icon:    icon,
+			},
+		},
 	})
-	app.Bind(basic)
-	app.Bind(time2Date)
-	app.Bind(date2Time)
-	app.Bind(getNowTimestamp)
-	app.Bind(jsonFormat)
-	app.Bind(jsonCompress)
-	app.Bind(removeEscaping)
-	app.Bind(encode)
-	app.Bind(decode)
-	app.Run()
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }
