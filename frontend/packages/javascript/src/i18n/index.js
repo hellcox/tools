@@ -5,8 +5,8 @@ import en from "./locales/en.json";
 import fr from "./locales/fr.json";
 
 const i18n = createI18n({
-  locale: "en",
-  fallbackLocale: "en",
+  locale: "zh-Hans",
+  fallbackLocale: "zh-Hans",
   legacy:false,
   messages: {
     "zh-Hans": zhHans,

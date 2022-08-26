@@ -9,9 +9,14 @@
   },
   "author": "hellcox",
   "license": "MIT",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "engines": {
     "node": ">=15.0.0",
     "npm": ">=7.0.0"
+  },
+  "dependencies": {
+    "element-plus": "^2.2.14"
   }
 }
