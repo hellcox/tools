@@ -1,11 +1,16 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "@/views/Home.vue";
+import Time from "@/views/Time.vue";
+import Header from "@/components/public/Header.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Time,
+    meta:{
+      keepAlive:true
+    }
   },
   {
     path: "/about",
@@ -16,6 +21,23 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ "../views/About.vue");
     },
+  },
+  {
+    path: "/demo",
+    name: "Demo",
+    component: function () {
+      return import("../views/Demo.vue");
+    },
+  },
+  {
+    path: "/time",
+    name: "Time",
+    component: function () {
+      return import("../views/Time.vue");
+    },
+    meta:{
+      keepAlive:true
+    }
   },
 ];
 

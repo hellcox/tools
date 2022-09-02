@@ -49,6 +49,7 @@ func main() {
 		WindowStartState:  options.Normal,
 		Bind: []interface{}{
 			app,
+			NewTime(),
 		},
 		// Windows platform specific options
 		// Windows平台特定选项
@@ -83,5 +84,27 @@ func main() {
 
 	if err != nil {
 		log.Fatal(err)
+	}
+}
+
+type Response struct {
+	Code int         `json:"code"`
+	Msg  string      `json:"msg"`
+	Data interface{} `json:"data"`
+}
+
+func ResponseError(code int, msg string, data interface{}) interface{} {
+	return Response{
+		Code: code,
+		Msg:  msg,
+		Data: data,
+	}
+}
+
+func ResponseSuccess(msg string, data interface{}) interface{} {
+	return Response{
+		Code: 1,
+		Msg:  msg,
+		Data: data,
 	}
 }
