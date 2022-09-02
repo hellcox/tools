@@ -96,7 +96,7 @@ const DoGetNowTime = () => {
     })
   }, 1000);
 };
-//转换
+//时间转换
 const Convert = (type) => {
   if (type === 'time') {
     TimeToDate(time2DateIn.value).then(res => {
@@ -132,7 +132,6 @@ const Convert = (type) => {
     })
   }
 };
-
 
 onMounted(() => {
   DoGetNowTime()
